@@ -1,0 +1,28 @@
+.jumbotron {
+    height: 100vh;
+    background-color: aliceblue;
+}
+
+.card {
+    height: 50%;
+    text-align: center;
+    align-items: center;
+    min-height: 80%;
+}
+
+.card-header {
+    width: 100%;
+}
+
+.card-body {
+    display: contents;
+}
+
+.card-text {
+    margin: 30px;
+}
+
+#answer-button {
+    width: 70%;
+    margin: 10px;
+}

@@ -2,8 +2,19 @@
 {% load static %}
 
 {% block css %}
+<link rel="stylesheet" href="{% static 'css/questions.css' %}">
 {% endblock %}
 
 {% block content %}
-
+<div class="jumbotron">
+    <div class="card border-primary mb-3">
+        <div class="card-header">Question 1</div>
+        <div class="card-body">
+          <p class="card-text">This is where the question will be asked.</p>
+          <button type="button" class="btn btn-primary" id='answer-button'>Answer 1</button>
+          <button type="button" class="btn btn-primary" id='answer-button'>Answer 2</button>
+          <button type="button" class="btn btn-primary" id='answer-button'>Answer 3</button>
+        </div>
+    </div>
+</div>
 {% endblock content %}
