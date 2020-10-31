@@ -1,6 +1,7 @@
 .jumbotron {
     height: 100vh;
     background-color: aliceblue;
+    margin-bottom: 0;
 }
 
 .card {

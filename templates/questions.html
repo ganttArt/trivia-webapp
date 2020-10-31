@@ -6,15 +6,17 @@
 {% endblock %}
 
 {% block content %}
-<div class="jumbotron">
-    <div class="card border-primary mb-3">
-        <div class="card-header">Question 1</div>
-        <div class="card-body">
-          <p class="card-text">This is where the question will be asked.</p>
-          <button type="button" class="btn btn-primary" id='answer-button'>Answer 1</button>
-          <button type="button" class="btn btn-primary" id='answer-button'>Answer 2</button>
-          <button type="button" class="btn btn-primary" id='answer-button'>Answer 3</button>
-        </div>
-    </div>
-</div>
+{% for question in questions %}
+  <div class="jumbotron">
+      <div class="card border-primary mb-3">
+          <div class="card-header"></div>
+          <div class="card-body">
+            <p class="card-text">{{question.question}}</p>
+            {% for answer in question.answers %}
+              <button type="button" class="btn btn-primary" id='answer-button'>{{answer}}</button>
+            {% endfor %}
+          </div>
+      </div>
+  </div>
+{% endfor %}
 {% endblock content %}
