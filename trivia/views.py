@@ -47,8 +47,10 @@ class QuestionsView(TemplateView):
         return render(request, self.template_name, {'form': form, 'questions': self.questions[:20]})
 
     def post(self, request, *args, **kwargs):
-        form = self.trivia_form(request.POST)
-        print(request.POST)
-        if form.is_valid():
-            print('valid')
-            return render(request, 'results.html', {'result':request.POST})
+        answered_correctly = 0
+
+        for i in range(1, len(request.POST)):
+            if request.POST[str(i)] == self.questions[i - 1].correct_answer:
+                answered_correctly += 1
+
+        return render(request, 'results.html', {'answered_correctly':answered_correctly})

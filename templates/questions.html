@@ -7,8 +7,8 @@
 
 {% block content %}
 <form method="POST">
-{% csrf_token %}
-{{ form }}
+  {% csrf_token %}
+  <input type='submit'>
   {% for question in questions %}
     <div class="jumbotron" >
         <div class="card border-primary mb-3">
@@ -16,11 +16,15 @@
             <div class="card-body">
               <p class="card-text">{{question.question}}</p>
               {% for answer in question.answers %}
-                <button type="button" class="btn btn-primary" id='answer-button'>{{answer}}</button>
+                <label>
+                  <input type='radio' name={{question.number}} id='answer-button' value="{{answer}}">
+                  <p>{{ answer }}</p>
+                </label>
               {% endfor %}
             </div>
         </div>
     </div>
   {% endfor %}
+  <input type='submit'>
 </form>
 {% endblock content %}
