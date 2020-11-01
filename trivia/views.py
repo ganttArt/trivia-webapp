@@ -45,7 +45,7 @@ class QuestionsView(TemplateView):
             question.assign_number(str(num))
             num += 1
 
-        return render(request, self.template_name, {'form': form, 'questions': self.questions[:20]})
+        return render(request, self.template_name, {'form': form, 'questions': self.questions[:10]})
 
     def post(self, request, *args, **kwargs):
         answered_correctly = 0
