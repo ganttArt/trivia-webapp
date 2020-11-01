@@ -2,6 +2,7 @@ import json
 import random
 from django.shortcuts import render
 from django.views.generic import TemplateView
+from django.utils.datastructures import MultiValueDictKeyError
 from .forms import TriviaForm
 
 
@@ -50,7 +51,10 @@ class QuestionsView(TemplateView):
         answered_correctly = 0
 
         for i in range(1, len(request.POST)):
-            if request.POST[str(i)] == self.questions[i - 1].correct_answer:
-                answered_correctly += 1
+            try:
+                if request.POST[str(i)] == self.questions[i - 1].correct_answer:
+                    answered_correctly += 1
+            except MultiValueDictKeyError:
+                print('You skipped a question')
 
         return render(request, 'results.html', {'answered_correctly':answered_correctly})
