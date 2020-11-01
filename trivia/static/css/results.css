@@ -1,3 +1,7 @@
+p {
+    font-size: larger;
+}
+
 .jumbotron {
     height: 100vh;
     background-color: aliceblue;
