@@ -1,0 +1,21 @@
+.jumbotron {
+    height: 100vh;
+    background-color: aliceblue;
+    margin-bottom: 0;
+    text-align: -webkit-center;
+}
+
+.card {
+    width: fit-content;
+}
+
+.card-title {
+    margin: 20px;
+    font-size: xxx-large;
+}
+
+@media screen and (max-width: 500px) {
+    .display-3 {
+        font-size: 2rem;
+    }
+}

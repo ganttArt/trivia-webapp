@@ -2,8 +2,17 @@
 {% load static %}
 
 {% block css %}
+<link rel="stylesheet" href="{% static 'css/results.css' %}">
 {% endblock %}
 
 {% block content %}
-<p>{{ answered_correctly }}</p>
+<div class="jumbotron">
+    <h1 class="display-3">Congratulations!</h1>
+    <hr class="my-4">
+    <p>You answered:</p>
+    <div class="card text-white bg-primary mb-3">
+        <h4 class="card-title">{{ answered_correctly }}</h4>
+    </div>
+    <p>out of 20 questions correctly.</p>
+</div>
 {% endblock content %}
