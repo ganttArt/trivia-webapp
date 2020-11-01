@@ -6,17 +6,21 @@
 {% endblock %}
 
 {% block content %}
-{% for question in questions %}
-  <div class="jumbotron">
-      <div class="card border-primary mb-3">
-          <div class="card-header">Question {{question.number}}</div>
-          <div class="card-body">
-            <p class="card-text">{{question.question}}</p>
-            {% for answer in question.answers %}
-              <button type="button" class="btn btn-primary" id='answer-button'>{{answer}}</button>
-            {% endfor %}
-          </div>
-      </div>
-  </div>
-{% endfor %}
+<form method="POST">
+{% csrf_token %}
+{{ form }}
+  {% for question in questions %}
+    <div class="jumbotron" >
+        <div class="card border-primary mb-3">
+            <div class="card-header">Question {{question.number}}</div>
+            <div class="card-body">
+              <p class="card-text">{{question.question}}</p>
+              {% for answer in question.answers %}
+                <button type="button" class="btn btn-primary" id='answer-button'>{{answer}}</button>
+              {% endfor %}
+            </div>
+        </div>
+    </div>
+  {% endfor %}
+</form>
 {% endblock content %}

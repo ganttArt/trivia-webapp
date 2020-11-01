@@ -2,6 +2,7 @@ import json
 import random
 from django.shortcuts import render
 from django.views.generic import TemplateView
+from .forms import TriviaForm
 
 
 class Question:
@@ -21,6 +22,7 @@ class Question:
 class QuestionsView(TemplateView):
     template_name = 'questions.html'
     questions = []
+    trivia_form = TriviaForm
 
     with open('Apprentice_TandemFor400_Data.json') as file:
         data = json.load(file)
@@ -33,16 +35,20 @@ class QuestionsView(TemplateView):
                 )
             )
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
+    def get(self, request, *args, **kwargs):
+        form = self.trivia_form()
         random.shuffle(self.questions)
 
         num = 1
         for question in self.questions:
             question.assign_number(str(num))
-            print(question.number)
             num += 1
-        
-        self.questions = self.questions[:20]
-        context['questions'] = self.questions
-        return context
+
+        return render(request, self.template_name, {'form': form, 'questions': self.questions[:20]})
+
+    def post(self, request, *args, **kwargs):
+        form = self.trivia_form(request.POST)
+        print(request.POST)
+        if form.is_valid():
+            print('valid')
+            return render(request, 'results.html', {'result':request.POST})
