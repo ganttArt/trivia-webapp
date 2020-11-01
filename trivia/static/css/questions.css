@@ -1,3 +1,8 @@
+label {
+    border: 1px solid;
+    width: 200px;
+}
+
 .jumbotron {
     height: 100vh;
     background-color: aliceblue;
