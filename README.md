@@ -1,8 +1,8 @@
 # trivia-webapp
-A trivia web application built in Python3/Django
+A trivia web application built in Python3/Django.
 
-Home page
+Home Page:
 ![](/trivia/static/question_page.png)
 
-Results Page
+Results Page:
 ![](/trivia/static/results_page.png)
