@@ -15,5 +15,15 @@
     </div>
     <p>out of 10 questions correctly.</p>
     <hr class="my-4">
+    <div class="card border-primary mb-3">
+        <div class="card-header">Answers</div>
+        <div class="card-body">
+            {% for question in questions %}
+                <p class="card-text">{{question.question}} 
+                    <span id='answer-text'>{{question.correct_answer}}</span>
+                </p>
+            {% endfor %}
+        </div>
+      </div>
 </div>
 {% endblock content %}

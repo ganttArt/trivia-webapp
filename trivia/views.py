@@ -57,4 +57,5 @@ class QuestionsView(TemplateView):
             except MultiValueDictKeyError:
                 print('You skipped a question')
 
-        return render(request, 'results.html', {'answered_correctly':answered_correctly})
+        return render(request, 'results.html',
+                      {'answered_correctly':answered_correctly, 'questions': self.questions[:10]})

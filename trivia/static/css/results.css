@@ -3,7 +3,7 @@ p {
 }
 
 .jumbotron {
-    height: 100vh;
+    height: auto;
     background-color: aliceblue;
     margin-bottom: 0;
     text-align: -webkit-center;
@@ -13,9 +13,17 @@ p {
     width: fit-content;
 }
 
+.card-header {
+    font-size: x-large;
+}
+
 .card-title {
     margin: 20px;
     font-size: xxx-large;
+}
+
+#answer-text{
+    color: #eb6864;
 }
 
 @media screen and (max-width: 500px) {
