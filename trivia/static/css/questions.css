@@ -1,3 +1,7 @@
+html {
+    scroll-behavior: smooth;
+}
+
 label {
     border: 1px solid;
     width: 200px;

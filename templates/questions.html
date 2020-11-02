@@ -9,14 +9,15 @@
 <form method="POST">
   {% csrf_token %}
   {% for question in questions %}
-  <div class="jumbotron">
+  <div class="jumbotron" id={{question.number}}>
     <div class="card border-primary mb-3">
       <div class="card-header">Question {{question.number}}</div>
       <div class="card-body">
         <p class="card-text">{{question.question}}</p>
         {% for answer in question.answers %}
         <label class='border-primary'>
-          <input type='radio' name={{question.number}} id='answer-button' value="{{answer}}">
+          <input type='radio' name={{question.number}} id='answer-button' value="{{answer}}"
+          onclick="onRadioClick(this.name)">
           <p>{{ answer }}</p>
         </label>
         {% endfor %}
@@ -33,3 +34,13 @@
   </div>
 </form>
 {% endblock content %}
+{% block javascript %}
+<script>
+  function onRadioClick(clicked_question){
+    // alert(clicked_question);
+    var next_question_id = parseInt(clicked_question) + 1
+    var next_question = document.getElementById(next_question_id.toString());
+    next_question.scrollIntoView();
+  }
+</script>
+{% endblock javascript %}
