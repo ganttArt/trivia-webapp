@@ -27,6 +27,7 @@ class QuestionsView(TemplateView):
 
     with open('Apprentice_TandemFor400_Data.json') as file:
         data = json.load(file)
+        print('loading questions')
         for question in data:
             questions.append(
                 Question(
@@ -35,6 +36,7 @@ class QuestionsView(TemplateView):
                     question['correct']
                 )
             )
+    print('questions from view ', [x.correct_answer for x in questions[:10]])
 
     def get(self, request, *args, **kwargs):
         form = self.trivia_form()
@@ -44,7 +46,7 @@ class QuestionsView(TemplateView):
         for question in self.questions:
             question.assign_number(str(num))
             num += 1
-
+        print('questions from get ', [x.correct_answer for x in self.questions[:10]])
         return render(request, self.template_name, {'form': form, 'questions': self.questions[:10]})
 
     def post(self, request, *args, **kwargs):
@@ -56,6 +58,7 @@ class QuestionsView(TemplateView):
                     answered_correctly += 1
             except MultiValueDictKeyError:
                 print('You skipped a question')
-
+        print('post request ', request.POST)
+        print('questions from post ', [x.correct_answer for x in self.questions[:10]])
         return render(request, 'results.html',
                       {'answered_correctly':answered_correctly, 'questions': self.questions[:10]})
