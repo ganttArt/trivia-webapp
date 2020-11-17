@@ -7,17 +7,15 @@ from .forms import TriviaForm
 
 
 class Question:
-    def __init__(self, question, answers, correct_answer, number=0):
+    def __init__(self, question, answers, correct_answer, number):
         self.question = question
         self.answers = answers
+        self.answers.append(correct_answer)
         self.correct_answer = correct_answer
         self.number = number
-
-        self.answers.append(correct_answer)
-        random.shuffle(self.answers)
     
-    def assign_number(self, number):
-        self.number = number
+    def add_correctness(self, correct):
+        self.correct = correct
 
 
 class QuestionsView(TemplateView):
@@ -27,38 +25,45 @@ class QuestionsView(TemplateView):
 
     with open('Apprentice_TandemFor400_Data.json') as file:
         data = json.load(file)
+        number = 0
         print('loading questions')
         for question in data:
             questions.append(
                 Question(
                     question['question'],
                     question['incorrect'],
-                    question['correct']
+                    question['correct'],
+                    number
                 )
             )
-    print('questions from view ', [x.correct_answer for x in questions[:10]])
+            number += 1    
+    # print('questions from view ', [x.question for x in questions])
 
     def get(self, request, *args, **kwargs):
         form = self.trivia_form()
-        random.shuffle(self.questions)
-
-        num = 1
-        for question in self.questions:
-            question.assign_number(str(num))
-            num += 1
-        print('questions from get ', [x.correct_answer for x in self.questions[:10]])
-        return render(request, self.template_name, {'form': form, 'questions': self.questions[:10]})
+        questions = random.sample(self.questions, 10)
+        # print('questions from get ', [x.correct_answer for x in questions])
+        return render(request, self.template_name, {'form': form, 'questions': questions})
 
     def post(self, request, *args, **kwargs):
         answered_correctly = 0
+        questions = []
 
-        for i in range(1, len(request.POST)):
-            try:
-                if request.POST[str(i)] == self.questions[i - 1].correct_answer:
-                    answered_correctly += 1
-            except MultiValueDictKeyError:
-                print('You skipped a question')
-        print('post request ', request.POST)
-        print('questions from post ', [x.correct_answer for x in self.questions[:10]])
-        return render(request, 'results.html',
-                      {'answered_correctly':answered_correctly, 'questions': self.questions[:10]})
+        for answer in request.POST.items():
+            correct = False
+            if answer[0] == 'csrfmiddlewaretoken':
+                continue
+            elif self.questions[int(answer[0])].correct_answer == answer[1]:
+                answered_correctly += 1
+                correct = True
+
+            question = Question(
+                self.questions[int(answer[0])].question,
+                [],
+                self.questions[int(answer[0])].correct_answer,
+                None
+            )
+            question.add_correctness(correct)
+            questions.append(question)
+            
+        return render(request, 'results.html', {'answered_correctly':answered_correctly, 'questions': questions})

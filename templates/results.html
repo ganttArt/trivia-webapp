@@ -19,9 +19,15 @@
         <div class="card-header">Answers</div>
         <div class="card-body">
             {% for question in questions %}
-                <p class="card-text">{{question.question}} 
-                    <span id='answer-text'>{{question.correct_answer}}</span>
-                </p>
+                {% if question.correct %}
+                    <p class="card-text">{{question.question}} 
+                        <span id='answer-text' style="color: green;">{{question.correct_answer}}</span>
+                    </p>
+                {% else %}
+                    <p class="card-text">{{question.question}} 
+                        <span id="answer-text">{{question.correct_answer}}</span>
+                    </p>
+                {% endif %}
             {% endfor %}
         </div>
       </div>
