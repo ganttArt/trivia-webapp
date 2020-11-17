@@ -7,12 +7,12 @@ from .forms import TriviaForm
 
 
 class Question:
-    def __init__(self, question, answers, correct_answer, number):
+    def __init__(self, question, answers, correct_answer, question_id):
         self.question = question
         self.answers = answers
         self.answers.append(correct_answer)
         self.correct_answer = correct_answer
-        self.number = number
+        self.question_id = question_id
     
     def add_correctness(self, correct):
         self.correct = correct
@@ -28,7 +28,7 @@ class QuestionsView(TemplateView):
 
     with open('Apprentice_TandemFor400_Data.json') as file:
         data = json.load(file)
-        number = 0
+        question_id = 0
         print('loading questions')
         for question in data:
             questions.append(
@@ -36,10 +36,10 @@ class QuestionsView(TemplateView):
                     question['question'],
                     question['incorrect'],
                     question['correct'],
-                    number
+                    question_id
                 )
             )
-            number += 1    
+            question_id += 1    
 
     def get(self, request, *args, **kwargs):
         form = self.trivia_form()

@@ -16,7 +16,7 @@
         <p class="card-text">{{question.question}}</p>
         {% for answer in question.answers %}
         <label class='border-primary'>
-          <input type='radio' name={{question.number}} id='answer-button' value="{{answer}}"
+          <input type='radio' name={{question.question_id}} id='answer-button' value="{{answer}}"
           onclick="onRadioClick(this.parentNode.parentNode.parentNode.parentNode.id)">
           <p>{{ answer }}</p>
         </label>
