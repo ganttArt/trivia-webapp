@@ -23,11 +23,10 @@ label {
 .card-header {
     width: 100%;
     font-size: larger;
-    margin-bottom: 60px;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 120px;
+    min-height: 70px;
 }
 
 .card-body {
@@ -35,7 +34,8 @@ label {
 }
 
 .card-text {
-    margin: 30px;
+    margin: 50px;
+    font-size: x-large;
 }
 
 #answer-button {
