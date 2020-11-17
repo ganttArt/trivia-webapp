@@ -20,6 +20,9 @@ class Question:
     def add_question_order(self, question_order):
         self.question_order = question_order
 
+    def shuffle_answers(self):
+        random.shuffle(self.answers)
+
 
 class QuestionsView(TemplateView):
     template_name = 'questions.html'
@@ -48,6 +51,7 @@ class QuestionsView(TemplateView):
 
         for question in questions:
             question.add_question_order(question_order)
+            question.shuffle_answers()
             question_order += 1
         
         return render(request, self.template_name, {'form': form, 'questions': questions})
