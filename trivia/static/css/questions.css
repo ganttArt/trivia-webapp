@@ -15,7 +15,6 @@ label {
 }
 
 .card {
-    height: 50%;
     text-align: center;
     align-items: center;
     min-height: 80%;
@@ -23,6 +22,12 @@ label {
 
 .card-header {
     width: 100%;
+    font-size: larger;
+    margin-bottom: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 120px;
 }
 
 .card-body {
