@@ -17,6 +17,9 @@ class Question:
     def add_correctness(self, correct):
         self.correct = correct
 
+    def add_question_order(self, question_order):
+        self.question_order = question_order
+
 
 class QuestionsView(TemplateView):
     template_name = 'questions.html'
@@ -37,12 +40,16 @@ class QuestionsView(TemplateView):
                 )
             )
             number += 1    
-    # print('questions from view ', [x.question for x in questions])
 
     def get(self, request, *args, **kwargs):
         form = self.trivia_form()
+        question_order = 1
         questions = random.sample(self.questions, 10)
-        # print('questions from get ', [x.correct_answer for x in questions])
+
+        for question in questions:
+            question.add_question_order(question_order)
+            question_order += 1
+        
         return render(request, self.template_name, {'form': form, 'questions': questions})
 
     def post(self, request, *args, **kwargs):
