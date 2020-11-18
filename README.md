@@ -1,6 +1,9 @@
 # trivia-webapp
 A trivia web application built in Python3/Django.</br>
 </br>
+Deployed to Heroku at:</br>
+[cgantt-trivia.herokuapp.com](https://cgantt-trivia.herokuapp.com/)</br>
+</br>
 To run on local server:</br>
 pip3 install -r requirements.txt</br>
 python3 manage.py runserver</br>
