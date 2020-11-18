@@ -12,7 +12,7 @@ This trivia app:</br>
 - shows the user's score after answering all questions</br>
 - displays the correct and incorrect answers afterwards</br>
 - uses Bootstrap/Bootswatch to make it pretty</br>
-
+</br>
 To run on local server:</br>
 pip3 install -r requirements.txt</br>
 python3 manage.py runserver</br>
